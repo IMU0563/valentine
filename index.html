@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Envelope</title>
+  <style>
+    /* CSS Styles */
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f9f0f0;
+      margin: 0;
+      font-family: 'Times New Roman', Courier, monospace;
+    }
+
+    .envelope {
+      position: relative;
+      width: 480px; /* Ukuran amplop */
+      height: 320px; /* Ukuran amplop */
+      background-color: #ff69b4;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transform-origin: top;
+      transition: transform 2.8s ease-in-out; /* Hapus transisi saat dibuka */
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0px; /* Disesuaikan untuk amplop yang lebih besar */
+      left: 0;
+      width: 480px; /* Flap yang lebih besar */
+      height: 220px; /* Flap yang lebih besar */
+      background-color: #ff99cc;
+      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+      transform-origin: top;
+      transition: transform 2.8s ease-in-out; /* Hapus transisi saat dibuka */
+    }
+
+    .letter {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 450px; /* Surat yang lebih besar */
+      height: 300px; /* Surat yang lebih besar */
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px; /* Lebih banyak padding untuk teks yang lebih besar */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transform: translate(-50%, -50%); /* Di tengah */
+      opacity: 0;
+      transition: opacity 3s ease-in-out, transform 3s ease-in-out;
+      border: 3px solid #003049;
+      border-style : dashed;
+    }
+
+    .isi i {
+      margin: 15px 0; /* Lebih banyak spasi untuk teks yang lebih besar */
+      font-size: 20px; /* Ukuran font yang lebih besar */
+      color: #333;
+      margin-bottom: 0px;
+    }
+
+    .letter p {
+      font-size: 35px;
+      font-weight: bold;
+      color: #e91e63;
+      margin-top: 5px;
+    }
+
+    .pen z {
+      position: absolute; /* Posisi teks "refade" secara absolut */
+      right: 10px; /* Rata kanan */
+      font-size: 20px;
+      color: #333;
+      margin-top: 25px;
+    }
+
+    .gif_container img {
+      right: 1PX;
+      width: 105px; /* Sesuaikan ukuran GIF */
+      height: 90px; /* Pertahankan rasio aspek */
+      border-radius: 10px; /* Tambahkan sudut melengkung */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Tambahkan bayangan */
+      margin-top: 15px;
+    }
+
+    .buttons {
+      margin-top: 30px; /* Lebih banyak spasi untuk tombol */
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #ff69b4;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      margin: 0 10px;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+
+    /* Open state */
+    .envelope.open {
+      transform: none; /* Tidak ada transformasi saat dibuka */
+    }
+
+    .envelope.open .envelope-flap {
+      transform: rotateX(-180deg);
+    }
+
+    .envelope.open .letter {
+      opacity: 1;
+      transform: translate(-50%, -50%); /* Tetap di tengah tanpa perubahan ukuran */
+    }
+  </style>
+</head>
+<body>
+  <div class="envelope">
+    <div class="envelope-flap"></div>
+    <div class="letter">
+      <p>Happy Valentine's Day</p>
+      <div class="isi">
+        <i>There are not many people like you.</i>
+        <i>You are so amazing, my comfort person,</i>
+        <i>and you are just really great to hang out with sometimes.</i>
+        <i>Meeting you was the greatest thing ever.</i>
+        <i>Sending you lots of love & heartfelt wishes.</i>
+      </div>
+      <div class="pen">
+        <z>~Repade</z>
+      </div>
+      <div class="gif_container">
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGg2MDFoeWp3a2JhcWw4ejRzMTk2cGpkdHM1MWNxeXlvdXp6NHM5ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kZqbBT64ECtjy/giphy.gif" alt="Celebration GIF">
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <button id="openButton">OPEN</button>
+    <button id="closeButton">CLOSE</button>
+  </div>
+
+  <script>
+    // JavaScript Code
+    const envelope = document.querySelector('.envelope');
+    const openButton = document.getElementById('openButton');
+    const closeButton = document.getElementById('closeButton');
+
+    // Function to open the envelope
+    function openEnvelope() {
+      envelope.classList.add('open');
+    }
+
+    // Function to close the envelope
+    function closeEnvelope() {
+      envelope.classList.remove('open');
+    }
+
+    // Add event listeners to the buttons
+    openButton.addEventListener('click', openEnvelope);
+    closeButton.addEventListener('click', closeEnvelope);
+  </script>
+</body>
+</html>
